@@ -3,9 +3,11 @@ Blob[] blobs = new Blob[30];
 float theta;
 int frms = 300;
 
+
+
 void setup() {
   size(640, 480);
-  colorMode(HSB, 360, 100, 100);
+  //colorMode(HSB, 360, 100, 100);
   for (int i=0; i<blobs.length; i++) {
     int d = i%2==0?1:-1;
     float offSet = float(i)/float(blobs.length);
@@ -15,6 +17,11 @@ void setup() {
 
 void draw() {
   background(34);
+  noStroke();
+  fill(color(0, 0, 255));
+
+  rect( width/2 - width/4, height/2 - height/4, width/2, height/2, height/8);
+
   for (int i=0; i<blobs.length; i++) {
     //blobs[i].update();
     //blobs[i].draw_me();
@@ -28,12 +35,15 @@ void draw() {
         float sum = 0;
         for (Blob b : blobs) {
           float d = dist(x, y, b.pos.x, b.pos.y);
-          sum += 20*(b.r/d);
+          sum += 22*(b.r/d);
         }
-        pixels[index] = color(sum-150);
+        pixels[index] += color(sum-496);
       }
     }
     updatePixels();
+  }
+  for (int i=0; i<blobs.length; i++) {
+    //blobs[i].draw_me();
   }
   theta += 0.02;
   //if (frameCount<frms) saveFrame("image-###.gif");
@@ -98,8 +108,8 @@ class Blob {
 
   void rect_update() {
     // make blob walk around rectangle perimeter
-    //offset = offset + 0.002;
-    offset = offset + 0.004*(noise(theta, 200*orig + 0000) -0.3 );
+    offset = offset + 0.0002;
+    //offset = offset + 0.004*(noise(theta, 200*orig + 0000) -0.3 );
     while ((orig + offset) >= 1.0) {
       offset = offset - 1.0;
     }
@@ -107,15 +117,17 @@ class Blob {
       offset = offset + 1.0;
     }
     pos = rect_pos(orig + offset);
-    noiseDetail(1, 0);
-    driftx  = 50*(noise(theta, 200*orig + 1000) -0.5 );
-    drifty  = 50*(noise(theta, 200*orig + 2000) -0.5 );
-    ellipse(pos.x + driftx, pos.y + drifty, 20, 20);
+    noiseDetail(3, 0);
+    driftx  = 70*(noise(theta+  PI*100*orig, 0) -0.4 );
+    drifty  = 70*(noise(theta, 100*orig) -0.4 );
+    pos.x += driftx; 
+    pos.y += drifty; 
+    //ellipse(pos.x, pos.y, 20, 20);
   }
 
   void draw_me() {
     // for debugging, 
-    float rs = r*0.3;
+    float rs = r*0.15;
     //ellipse(pos.x - rs, pos.y -rs, rs, pos.y +rs);
     ellipse(pos.x, pos.y, rs, rs);
   }
