@@ -50,7 +50,7 @@ class Blob {
     pos = new PVector(0, 0);
     //vel = PVector.random2D();
     //vel.mult(random(2, 5));
-    r = random(50, 100);
+    r = random(150, 155);
     //r = 70;
     //d = random(50, 200);
     offSet = _offSet;
@@ -62,8 +62,8 @@ class Blob {
     //d = map(pow(abs(sin(theta+offSet*9)),0.5),0,1,-5,200);
     d = map(pow(sin(theta+offSet*11),1),-1,1,-10,180);
     //d = map(pow(sin(theta+offSet*3),3),0,1,50,200);
-    pos.x = width/2 + cos(offSet + drift)*d;
-    pos.y = height/2 + sin(offSet + drift)*d;
+    pos.x = width/2 + 1.2*cos(offSet + drift)*d;
+    pos.y = height/2 + 0.7*sin(offSet + drift)*d;
     //noiseDetail(4,0.5);
     //drift  += 0.75*(noise( -0.03) -0.5); 
     drift  += 0.05*(noise(theta, 100*offSet) -0.5 ); 
