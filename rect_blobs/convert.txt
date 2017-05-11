@@ -1,0 +1,2 @@
+/cygdrive/c/Program\ Files/ImageMagick-7.0.5-Q16/convert.exe   -delay 7 -loop 0 f*.gif ani.gif
+

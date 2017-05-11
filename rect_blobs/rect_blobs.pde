@@ -4,6 +4,12 @@ float theta;
 int frms = 300;
 
 
+color colorLerp(float input) {
+  color color1 = color(255, 0, 0);
+  color color2= color (0, 0, 255);
+  return lerpColor(color1, color2, input);
+}
+
 
 void setup() {
   size(640, 480);
@@ -37,7 +43,8 @@ void draw() {
           float d = dist(x, y, b.pos.x, b.pos.y);
           sum += 22*(b.r/d);
         }
-        pixels[index] += color(sum-496);
+        //pixels[index] += color(sum-496);
+        pixels[index] = colorLerp(sum/800);
       }
     }
     updatePixels();
@@ -47,6 +54,9 @@ void draw() {
   }
   theta += 0.02;
   //if (frameCount<frms) saveFrame("image-###.gif");
+  //saveFrame("f###.gif");
+  //if (frameCount==100)
+  //  exit();
 }
 
 class Blob {
